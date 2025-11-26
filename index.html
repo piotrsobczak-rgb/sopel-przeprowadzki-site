@@ -74,10 +74,10 @@
             <p>Nowoczesny tabor, doświadczeni kierowcy i szybkie terminy realizacji.</p>
           </article>
           <article class="card">
-            <picture>
-              <source srcset="images/Zdjęcie w windzie.webp" type="image/webp">
-              <img src="images/Zdjęcie w windzie.png" alt="Wniesienie">
-            </picture>
+              <picture>
+                <source srcset="images/Zrzut ekranu 2025-11-26 135924.webp" type="image/webp">
+                <img src="images/Zrzut ekranu 2025-11-26 135924.png" alt="Montaż i wniesienie">
+              </picture>
             <h3>Montaż i wniesienie</h3>
             <p>Montowanie mebli, wniesienie do mieszkania lub biura — bez uszkodzeń.</p>
           </article>
@@ -121,7 +121,7 @@
     <section id="kontakt" class="section">
       <div class="container">
         <h2>Kontakt</h2>
-        <form name="kontakt" method="POST" data-netlify="true" action="/thank-you.html" netlify-honeypot="bot-field">
+        <form id="contact-form" name="kontakt" method="POST" action="/.netlify/functions/send-email" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="kontakt">
           <p style="display:none"><label>Nie wypełniaj: <input name="bot-field"></label></p>
           <div class="field">
@@ -165,11 +165,72 @@
     document.getElementById('year').textContent = new Date().getFullYear();
     // Tiny enhancement: if Netlify not available (local preview) show message instead of posting
     (function(){
-      var form = document.querySelector('form[name="kontakt"]');
+      var form = document.getElementById('contact-form');
       if(!form) return;
+
+      // Intercept submit to attempt serverless send (Netlify function).
+      // If the function fails (no SENDGRID key configured), fallback to FormSubmit.co which sends email without server-side secrets.
       form.addEventListener('submit', function(e){
-        var usesNetlify = form.hasAttribute('data-netlify');
-        if(!usesNetlify){ e.preventDefault(); alert('Podgląd lokalny: formularz zostałby wysłany na serwer (Netlify).'); }
+        // let the browser proceed if JavaScript disabled
+        if(e.defaultPrevented) return;
+        e.preventDefault();
+
+        var data = new FormData(form);
+
+        // Helper to build urlencoded body
+        function toUrlEncoded(fd){
+          var pairs = [];
+          for(var pair of fd.entries()){ pairs.push(encodeURIComponent(pair[0]) + '=' + encodeURIComponent(pair[1])); }
+          return pairs.join('&');
+        }
+
+        var body = toUrlEncoded(data);
+
+        // Try Netlify Function first
+        fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body
+        }).then(function(res){
+          if(res.status === 302 || res.redirected){
+            // function redirected to thank-you
+            window.location = '/thank-you.html';
+            return;
+          }
+          if(res.ok){
+            window.location = '/thank-you.html';
+            return;
+          }
+          // If function returns error (likely missing API key), fallback to FormSubmit
+          fallbackToFormSubmit();
+        }).catch(function(){
+          // network or other failure -> fallback
+          fallbackToFormSubmit();
+        });
+
+        function fallbackToFormSubmit(){
+          // Create a temporary form that posts to FormSubmit.co which will send an email to the address directly
+          var fb = document.createElement('form');
+          fb.style.display = 'none';
+          fb.method = 'POST';
+          fb.action = 'https://formsubmit.co/piotr.sobczak@tm-bud.pl';
+
+          // Copy fields
+          for(var pair of data.entries()){
+            var i = document.createElement('input');
+            i.type = 'hidden';
+            i.name = pair[0];
+            i.value = pair[1];
+            fb.appendChild(i);
+          }
+          // Ensure redirect back to our thank-you page
+          var next = document.createElement('input'); next.type='hidden'; next.name='_next'; next.value=window.location.origin + '/thank-you.html'; fb.appendChild(next);
+          // Disable Captcha requirement and allow plain text
+          var disable = document.createElement('input'); disable.type='hidden'; disable.name='_captcha'; disable.value='false'; fb.appendChild(disable);
+
+          document.body.appendChild(fb);
+          fb.submit();
+        }
       });
     })();
   </script>

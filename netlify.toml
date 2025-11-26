@@ -3,6 +3,9 @@
   publish = "."
   command = ""
 
+[functions]
+  directory = "functions"
+
 # Redirects or headers (example - not required for static site)
 [[redirects]]
   from = "/thank-you.html"

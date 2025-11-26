@@ -35,6 +35,18 @@ I added helper scripts in `scripts/`:
 
 I also added `robots.txt` and `sitemap.xml`. NOTE: replace `https://example.com` in those files with your real domain before publishing.
 
+Server-side email (SendGrid)
+--------------------------------
+To receive form submissions directly by email at `piotr.sobczak@tm-bud.pl`, this project includes a Netlify Function `functions/send-email.js` that will send incoming form data using the SendGrid API.
+
+What you must set in Netlify (Site settings → Build & deploy → Environment):
+- `SENDGRID_API_KEY` — your SendGrid API key (required)
+- `FROM_EMAIL` — optional (defaults to `no-reply@sopelprzeprowadzki.pl`)
+
+After adding the variables, redeploy the site. The contact form (`index.html`) now posts to the function endpoint which will send mail and redirect the user to `thank-you.html`.
+
+If you prefer a different mail provider (Mailgun, SMTP), tell me and I'll adapt the function — you'll need to place provider credentials in environment variables.
+
 Quick usage notes:
 
 - To attempt WebP optimization (will only run if ImageMagick or cwebp is installed):
