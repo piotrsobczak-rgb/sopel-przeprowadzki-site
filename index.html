@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sopel Przeprowadzki i transport</title>
+  <meta name="description" content="Profesjonalne przeprowadzki i transport. Bez stresu, na czas i z dbałością o mienie." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{ --bg:#0b1020; --card:#141a2a; --accent:#4cc9f0; --text:#e5e7eb; --muted:#aab4c3; --radius:12px }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Arial;color:var(--text);background:linear-gradient(135deg,#0b1020 0%,#1a1f2f 60%,#0b1020 100%)}
+    .container{width:min(1100px,92%);margin:0 auto}
+    header{position:sticky;top:0;padding:14px 20px;background:rgba(10,12,22,.9);border-bottom:1px solid rgba(255,255,255,.05)}
+    .brand{font-weight:700}
+    nav{display:flex;gap:18px;justify-content:flex-end}
+    nav a{color:#d9e3f4;text-decoration:none;font-weight:600}
+    .hero{padding:60px 0 40px}
+    h1{font-size:clamp(28px,4vw,44px);margin:0 0 12px}
+    .muted{color:var(--muted)}
+    .btn{display:inline-block;padding:12px 22px;border-radius:999px;border:0;font-weight:600;cursor:pointer}
+    .btn-primary{background:var(--accent);color:#0b1020}
+    .section{padding:48px 0}
+    .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+    .card{background:rgba(20,26,42,.9);border-radius:var(--radius);padding:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+    .card h3{margin-top:8px}
+    .price{font-size:22px;font-weight:700;color:#e9fbff}
+    form .field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+    input,textarea{border:1px solid rgba(255,255,255,.12);background:#0e1424;color:#fff;padding:10px;border-radius:8px}
+    input:focus,textarea:focus{outline:none;box-shadow:0 0 0 4px rgba(76,201,240,.12);border-color:var(--accent)}
+    footer{padding:20px 0;text-align:center;color:var(--muted)}
+    .card img{width:100%;height:auto;border-radius:8px}
+    @media(max-width:600px){nav{justify-content:center}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between">
+      <div class="brand">Sopel Przeprowadzki i transport</div>
+      <nav aria-label="Główne menu">
+        <a href="#oferta">Oferta</a>
+        <a href="#cennik">Cennik</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container" id="start">
+      <h1>Profesjonalne przeprowadzki i transport</h1>
+      <p class="muted">Bez stresu, na czas i z dbałością o mienie. Z nami przeprowadzka to czysta formalność — od pakowania po wniesienie i montaż.</p>
+      <p><a class="btn btn-primary" href="#kontakt">Skontaktuj się</a></p>
+    </section>
+
+    <section id="oferta" class="section">
+      <div class="container">
+        <h2>Co oferujemy</h2>
+        <div class="cards" aria-label="Oferta">
+          <article class="card">
+            <!-- Use picture with WebP source (if available) and PNG fallback -->
+            <picture>
+              <source srcset="images/samochód.webp" type="image/webp">
+              <img src="images/samochód.png" alt="Samochód przeprowadzkowy">
+            </picture>
+            <h3>Pakowanie i zabezpieczenie</h3>
+            <p>Profesjonalne pakowanie mienia, materiały ochronne, etykiety i zabezpieczenia.</p>
+          </article>
+          <article class="card">
+            <picture>
+              <source srcset="images/winda.webp" type="image/webp">
+              <img src="images/winda.png" alt="Winda transportowa">
+            </picture>
+            <h3>Transport</h3>
+            <p>Nowoczesny tabor, doświadczeni kierowcy i szybkie terminy realizacji.</p>
+          </article>
+          <article class="card">
+            <picture>
+              <source srcset="images/Zdjęcie w windzie.webp" type="image/webp">
+              <img src="images/Zdjęcie w windzie.png" alt="Wniesienie">
+            </picture>
+            <h3>Montaż i wniesienie</h3>
+            <p>Montowanie mebli, wniesienie do mieszkania lub biura — bez uszkodzeń.</p>
+          </article>
+          <article class="card">
+            <h3>Demontaż i układanie</h3>
+            <p>Profesjonalny demontaż i ponowne złożenie mebli oraz ustawienie w docelowej lokalizacji.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cennik" class="section">
+      <div class="container">
+        <h2>Cennik orientacyjny</h2>
+        <div class="cards">
+          <div class="card" style="display:flex;flex-direction:column;justify-content:space-between">
+            <div>
+              <h3>Przeprowadzka lokalna (do 20 km)</h3>
+              <p>Pakowanie, transport, zabezpieczenie, rozładunek</p>
+            </div>
+            <div class="price">od 399 PLN</div>
+          </div>
+          <div class="card" style="display:flex;flex-direction:column;justify-content:space-between">
+            <div>
+              <h3>Przeprowadzka średnia (20–60 km)</h3>
+              <p>Pakowanie, transport, montaż, utylizacja opakowań</p>
+            </div>
+            <div class="price">od 799 PLN</div>
+          </div>
+          <div class="card" style="display:flex;flex-direction:column;justify-content:space-between">
+            <div>
+              <h3>Przeprowadzka międzymiastowa</h3>
+              <p>Pełny zakres z planowaniem i logistyką</p>
+            </div>
+            <div class="price">wycena indywidualna</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="section">
+      <div class="container">
+        <h2>Kontakt</h2>
+        <form name="kontakt" method="POST" data-netlify="true" action="/thank-you.html" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="kontakt">
+          <p style="display:none"><label>Nie wypełniaj: <input name="bot-field"></label></p>
+          <div class="field">
+            <label for="name">Imię i nazwisko</label>
+            <input id="name" name="name" type="text" placeholder="Twoje imię i nazwisko" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="kontakt@twojadomena.pl" required>
+          </div>
+          <div class="field">
+            <label for="phone">Telefon</label>
+            <input id="phone" name="phone" type="tel" placeholder="600-000-000" inputmode="tel">
+          </div>
+          <div class="field">
+            <label for="address">Adres (skąd → dokąd)</label>
+            <input id="address" name="address" type="text" placeholder="Adres odbioru i docelowy">
+          </div>
+          <div class="field">
+            <label for="message">Wiadomość / szczegóły</label>
+            <textarea id="message" name="message" rows="5" placeholder="Opisz liczbę rzeczy, terminy itd."></textarea>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><input id="consent" name="consent" type="checkbox" required><label for="consent">Wyrażam zgodę na przetwarzanie danych w celu kontaktu.</label></div>
+          <div style="display:flex;gap:12px">
+            <button class="btn btn-primary" type="submit">Wyślij zapytanie</button>
+            <button class="btn" type="reset" style="background:transparent;border:1px solid rgba(255,255,255,.06);color:var(--muted)">Wyczyść</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Sopel Przeprowadzki i transport — © <span id="year"></span></p>
+      <p class="muted" style="font-size:13px">Telefon: 600-000-000 • Email: kontakt@sopelprzeprowadzki.pl</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Tiny enhancement: if Netlify not available (local preview) show message instead of posting
+    (function(){
+      var form = document.querySelector('form[name="kontakt"]');
+      if(!form) return;
+      form.addEventListener('submit', function(e){
+        var usesNetlify = form.hasAttribute('data-netlify');
+        if(!usesNetlify){ e.preventDefault(); alert('Podgląd lokalny: formularz zostałby wysłany na serwer (Netlify).'); }
+      });
+    })();
+  </script>
+</body>
+</html>

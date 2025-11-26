@@ -1,0 +1,10 @@
+# Netlify config (optional)
+[build]
+  publish = "."
+  command = ""
+
+# Redirects or headers (example - not required for static site)
+[[redirects]]
+  from = "/thank-you.html"
+  to = "/thank-you.html"
+  status = 200
